@@ -3,6 +3,7 @@ package tela;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -17,11 +18,14 @@ public class TelaSistema extends JFrame implements ActionListener {
 	public JMenuItem jmiEstado = new JMenuItem("Estado");
 	public JMenuItem jmiCidade = new JMenuItem("Cidade");
 	public JMenuItem jmiFornecedor = new JMenuItem("Fornecedor");
+	public JDesktopPane jdp = new JDesktopPane();
 	
 	
 	public TelaSistema() {
+		
+		getContentPane().add(jdp);
 		setTitle("Sistemas Comercial");
-		setSize(600, 400);
+		setSize(800, 400);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setJMenuBar(jmb);
 		
@@ -43,7 +47,8 @@ public class TelaSistema extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == jmiEstado ) {
-			System.out.println("Estado Selecionado");
+			TelaCadastroEstado telaCadastroEstado = new TelaCadastroEstado();
+			jdp.add(telaCadastroEstado);
 		
 		} else if (ae.getSource() == jmiCidade) {
 			System.out.println("Cidade Selecionada");
