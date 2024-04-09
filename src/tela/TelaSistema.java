@@ -25,7 +25,7 @@ public class TelaSistema extends JFrame implements ActionListener {
 		
 		getContentPane().add(jdp);
 		setTitle("Sistemas Comercial");
-		setSize(800, 400);
+		setSize(800		, 400);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setJMenuBar(jmb);
 		
@@ -51,7 +51,8 @@ public class TelaSistema extends JFrame implements ActionListener {
 			jdp.add(telaCadastroEstado);
 		
 		} else if (ae.getSource() == jmiCidade) {
-			System.out.println("Cidade Selecionada");
+			TelaCadastroCidade telaCadastroCidade = new TelaCadastroCidade();
+			jdp.add(telaCadastroCidade);
 			
 		} else if (ae.getSource() == jmiFornecedor) {
 			System.out.println("Fornecedor Selecionado");
