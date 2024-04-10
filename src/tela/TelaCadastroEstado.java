@@ -3,9 +3,13 @@ package tela;
 import javax.swing.JLabel;
 
 import componente.MeuCampoTexto;
+import dao.EstadoDao;
+import pojo.Estado;
 
 public class TelaCadastroEstado extends TelaCadastro {
-	
+	public Estado estado = new Estado();
+	public EstadoDao estadoDao = new EstadoDao(estado);			
+			
 	public JLabel jlCodigo = new JLabel("Código");
 	public JLabel jlNome = new JLabel("Nome");
 	public JLabel jlSigla = new JLabel("Sigla");
@@ -27,10 +31,36 @@ public class TelaCadastroEstado extends TelaCadastro {
 		adicionaComponente(4,1,1,1,jlAtivo);
 		adicionaComponente(4,2,1,1,jtfAtivo);
 		pack();
-		habilitaComponentes(false);
-		
-		
+		habilitaComponentes(false);	
 	
+	}
+	
+	@Override
+	public void incluirBD() {
+		estado.setId(Integer.parseInt(jtfCodigo.getText()));
+		estado.setNome(jtfNome.getText());
+		estado.setSigla(jtfSigla.getText());
+		estado.setAtivo(jtfAtivo.getText());
+		estadoDao.inserir();
+	}
+	
+	
+	@Override
+	public void consultar() {
+		super.consultar();
+		new TelaConsulta(this, "Consulta de Estado", new String[] {"Código", "Nome", "Sigla", "Ativo"}, EstadoDao.SQL_PESQUISAR);
+	}
+	
+	
+	@Override
+	public void preencherDados(int pk) {
+		estado.setId(pk);
+		estadoDao.consultar();
+		jtfCodigo.setText("" + estado.getId());
+		jtfNome.setText(estado.getNome());
+		jtfSigla.setText(estado.getSigla());
+		jtfAtivo.setText(estado.getAtivo());
+		super.preencherDados(pk);
 		
 	}
 }

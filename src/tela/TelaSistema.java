@@ -18,7 +18,7 @@ public class TelaSistema extends JFrame implements ActionListener {
 	public JMenuItem jmiEstado = new JMenuItem("Estado");
 	public JMenuItem jmiCidade = new JMenuItem("Cidade");
 	public JMenuItem jmiFornecedor = new JMenuItem("Fornecedor");
-	public JDesktopPane jdp = new JDesktopPane();
+	public static JDesktopPane jdp = new JDesktopPane();
 	
 	
 	public TelaSistema() {
