@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import componente.MeuComponente;
@@ -106,8 +108,22 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridy = linha;
 		gbc.gridx = coluna;
+		if(componente instanceof MeuComponente) {
+			gbc.gridheight = 1;
+			gbc.gridwidth = 1;
+			String texto = "<html><body>";
+			texto = texto + (((MeuComponente) componente).getDica());
+			if(((MeuComponente) componente).eObrigatorio()) {
+				texto = texto + "<font color=red>*</font>";
+			}
+			texto = texto + ": " + "</body></html>";
+			JLabel jl = new JLabel(texto);
+			gbc.anchor = GridBagConstraints.EAST;
+			jpComponentes.add(jl, gbc);
+		}
 		gbc.gridheight = linhas;
 		gbc.gridwidth = colunas;
+		gbc.gridx++;
 		gbc.anchor = GridBagConstraints.WEST;
 		jpComponentes.add(componente, gbc);
 		if (componente instanceof MeuComponente) {
@@ -128,7 +144,6 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 		}
 	}
 	
-	
 	public void incluir() {
 		estadoTela = incluindo;
 		limpaComponentes();
@@ -137,6 +152,7 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 
 	public void alterar () {
 		estadoTela = alterando;
+		habilitaComponentes(true);
 	}
 	
 	public void excluir() {
@@ -150,7 +166,20 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 	
 	public void confirmar() {
 		if (estadoTela == incluindo) {
+			if(validaComponentes()) {
+				incluirBD();
+			}else{
+				return;
+			}
 			incluirBD();
+		} else if(estadoTela == alterando) {
+			if(validaComponentes()) {
+				alterarBD();
+			}else {
+				return;
+			}
+		} else if(estadoTela == excluindo) {
+			excluirBD();
 		}
 		estadoTela = padrao;
 		habilitaComponentes(false);
@@ -165,11 +194,38 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 		
 	}
 	
+	public void alterarBD() {
+			
+	}
+	
+	public void excluirBD() {
+		limpaComponentes();
+	}
+	
 	public void preencherDados(int pk) {
 		estadoTela = padrao;
 		temDadosNaTela = true;
 		habilitaBotoes();
 	}
+	
+	public boolean validaComponentes() {
+		String erroObrigatorios = "";
+		for(int i = 0; i < componentes.size(); i++) {
+			if(componentes.get(i).eObrigatorio() && componentes.get(i).eVazio()) {
+				erroObrigatorios = erroObrigatorios + componentes.get(i).getDica() + "\n";	
+			}		
+		}
+		if(erroObrigatorios.isEmpty()) {
+			return true;
+		}else {
+			JOptionPane.showMessageDialog(null, "Os campos abaixos são obrigátoros e não foram preenchidos: \n\n" + "Campo: " + erroObrigatorios);
+			return false;
+		}
+	}
+
+
+
+
 }
 
 

@@ -11,8 +11,8 @@ import pojo.Estado;
 public class EstadoDao {
 	
 	private final String SQL_INCLUIR = "INSERT INTO ESTADO VALUES (?, ?, ?, ?)";
-	private final String SQL_ALTERAR = "UPDATE ESTADO SET NOME = ?, SIGLA = ?, ATIVO = ?, WHERE ID = ?";
-	private final String SQL_EXCLUIR = "DELE FROM ESTADO WHERE ID = ?";
+	private final String SQL_ALTERAR = "UPDATE ESTADO SET NOME = ?, SIGLA = ?, ATIVO = ? WHERE ID = ?";
+	private final String SQL_EXCLUIR = "DELETE FROM ESTADO WHERE ID = ?";
 	private final String SQL_CONSULTAR = "SELECT * FROM ESTADO WHERE ID = ?";
 	public static final String SQL_PESQUISAR = "SELECT * FROM ESTADO ORDER BY ID";
 	private Estado estado;
