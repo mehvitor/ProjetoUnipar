@@ -52,7 +52,7 @@ public class TelaCadastroEstado extends TelaCadastro {
 	@Override
 	public void consultar() {
 		super.consultar();
-		new TelaConsulta(this, "Consulta de Estado", new String[] {"Código", "Nome", "Sigla", "Ativo"}, EstadoDao.SQL_PESQUISAR);
+		new TelaConsulta(this, "Consulta de Estado", new String[] {"Código", "Nome", "Sigla"}, EstadoDao.SQL_PESQUISAR);
 	}
 	
 	

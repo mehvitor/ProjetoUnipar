@@ -11,10 +11,10 @@ import pojo.Cidade;
 public class CidadeDao {
 	
 	private final String SQL_INCLUIR = "INSERT INTO CIDADE VALUES (?, ?, ?, ?)";
-	private final String SQL_ALTERAR = "UPDATE CIDADE SET NOME = ?, ATIVO = ?, ESTADO = ?, WHERE ID = ?";
+	private final String SQL_ALTERAR = "UPDATE CIDADE SET NOME = ?, ATIVO = ? WHERE ID = ?";
 	private final String SQL_EXCLUIR = "DELETE FROM CIDADE WHERE ID = ?";
 	private final String SQL_CONSULTAR = "SELECT * FROM CIDADE WHERE ID = ?";
-	public static final String SQL_PESQUISAR = "SELECT CIDADE.ID, CIDADE.NOME, ESTADO.SIGLA, CIDADE.ATIVO FROM CIDADE, ESTADO WHERE CIDADE.IDESTADO = ESTADO.ID ORDER BY CIDADE.NOME";
+	public static final String SQL_PESQUISAR = "SELECT CIDADE.ID, CIDADE.NOME, ESTADO.SIGLA, CIDADE.ATIVO FROM CIDADE, ESTADO WHERE CIDADE.IDESTADO = ESTADO.ID ORDER BY ID";
 	public static final String SQL_COMBOBOX = "SELECT ID, NOME FROM CIDADE ORDER BY NOME";
 	private Cidade cidade;
 	
@@ -44,8 +44,7 @@ public class CidadeDao {
 			PreparedStatement ps = ConexaoPostgreSQL.getConexao().prepareStatement(SQL_ALTERAR);
 			ps.setString(1, cidade.getNome());
 			ps.setString(2, cidade.getAtivo());
-			ps.setInt(3, cidade.getEstado().getId());
-			ps.setInt(4, cidade.getId());
+			ps.setInt(3, cidade.getId());
 			ps.executeUpdate();
 			return true;
 			
@@ -76,7 +75,7 @@ public class CidadeDao {
 		if (rs.next()) {
 			cidade.setNome(rs.getString("NOME"));
 			cidade.setAtivo(rs.getString("ATIVO"));
-			cidade.getEstado().setId(rs.getInt("ID ESTADO"));
+			cidade.getEstado().setId(rs.getInt("IDESTADO"));
 			return true;
 		}	else {
 			JOptionPane.showMessageDialog(null, "Cidade não encontrado ( " + cidade.getId() + ") .");

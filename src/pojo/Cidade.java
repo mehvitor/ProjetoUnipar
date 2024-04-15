@@ -1,4 +1,4 @@
-	package pojo;
+package pojo;
 
 public class Cidade {
 	
@@ -6,6 +6,7 @@ public class Cidade {
 	private String nome;
 	private String ativo;
 	private Estado estado = new Estado();
+	
 	public int getId() {
 		return id;
 	}
