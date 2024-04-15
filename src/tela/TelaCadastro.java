@@ -171,7 +171,6 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 			}else{
 				return;
 			}
-			incluirBD();
 		} else if(estadoTela == alterando) {
 			if(validaComponentes()) {
 				alterarBD();

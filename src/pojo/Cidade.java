@@ -1,18 +1,11 @@
-package pojo;
+	package pojo;
 
 public class Cidade {
 	
 	private int id;
 	private String nome;
 	private String ativo;
-	private Estado estado;
-	
-	public Estado getEstado() {
-		return estado;
-	}
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
+	private Estado estado = new Estado();
 	public int getId() {
 		return id;
 	}
@@ -31,6 +24,14 @@ public class Cidade {
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	
+	
 	
 	
 
